@@ -53,6 +53,7 @@ void test_assignment()
     complex c3 = c1, c4 = c2;
     EXCEPT_EQ(c1, c3);
     EXCEPT_EQ(c2, c4);
+
     complex c5(-5, 8), c6(13, -1);
     c3 = {0, 0};
     c3 += c5;
@@ -60,18 +61,34 @@ void test_assignment()
     c4 -= c6;
     EXCEPT_EQ(c3, c5);
     EXCEPT_NEG(c4, c6);
+
     c3 *= c1;
     c4 *= c1;
     complex cBlank3 = c5*c1, cBlank4 = -c6*c1;
     EXCEPT_EQ(c3, cBlank3);
     EXCEPT_NEG(c4, cBlank4);
+
+    c3 /= c1;
+    EXCEPT_APPR(c3.Re(), c5.Re(), 1e-14);
+    EXCEPT_APPR(c3.Im(), c5.Im(), 1e-14);
+
+    c3 /= 2;
+    EXCEPT_APPR(c3.Re(), -2.5, 1e-14);
+    EXCEPT_APPR(c3.Im(), 4., 1e-14);
 };
 void test_binOperator()
 {
     double d = 4;
-    complex c1(5,-12), c2(-8, 6), c3(1, 0), c4(0, 2);
+    complex c1(5,-12), c2(-8, 6), c3(1, 0);
+    complex c4(0, 2), c7(2, 0), c8(0, 1), c9(0, 2);
     complex c5(1.0/0.0,-1.0/0.0), c6(0.0/0.0, 0.0/0.0);
     complex Check(4, -3);
+    bool c37 = (c3 == c7), c38 = (c3 == c8), c48 = (c4 == c8), c47 = (c4 == c7), c49 = (c4 == c9);
+    EXCEPT_EQ(c37, 0);
+    EXCEPT_EQ(c38, 0);
+    EXCEPT_EQ(c48, 0);
+    EXCEPT_EQ(c47, 0);
+    EXCEPT_EQ(c49, 1);
     EXCEPT_EQ(c2/(-2), Check);
     complex res = c1.Mo()*c2.Mo() - c4 + 3*c3 + (-d)*c2 + c2/d*c4; // 130 + (0, -2) + (3,0) + (32, -24) + (-3, -4);
     complex Check2(162, -30);
