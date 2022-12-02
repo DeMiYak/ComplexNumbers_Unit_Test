@@ -193,12 +193,24 @@ public:
         return false;
     }
 
+
+    // Small amendments in line 203
+    // (return {re/0.0,im/0.0};)
+    // instead of (return complex(0,0);)
     complex operator / (complex& c) const
     {
         double sq = c.Mo()*c.Mo();
         if(c.Mo() != 0)
             return {(this->re*c.re + this->im*c.im)/sq, (this->im*c.re - this->re*c.im)/sq};
-        return complex(0, 0);
+        return {re/0.0,im/0.0};
+    }
+
+
+    // New operator to divide double types
+    friend complex operator / (double d, complex& c)
+    {
+        complex c1(d,0);
+        return c1/c;
     }
 
     complex& operator += (const complex& c)                         // Plus one complex pair to the other

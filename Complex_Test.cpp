@@ -94,21 +94,27 @@ void test_binOperator()
     complex Check2(162, -30);
     std::cout << res << std::endl;
     EXCEPT_EQ(res, Check2);
-    
+
     complex c00(0,0);
     complex c01(1,1);
-    complex r0 = c00/c00, r1 = c01/c00 /*, d0 = 0/c00, d1 = 1.0/c00*/;
+    complex r0 = c00/c00, r1 = c01/c00, d0 = 0/c00, d1 = 1.0/c00;
+    std::cout << r0.Re() << ' '<< r0.Im() << ' ' << r1.Re() << ' ' << r1.Im() << ' ' << d1 << std::endl;
     EXCEPT_NAN(r0.Re());
     EXCEPT_NAN(r0.Im());
     EXCEPT_INF(r1.Re());
     EXCEPT_INF(r1.Im());
-/*
+
     EXCEPT_NAN(d0.Re());
     EXCEPT_NAN(d0.Im());
     EXCEPT_INF(d1.Re());
-    EXCEPT_INF(d1.Im());
-*/
-    
+    EXCEPT_NAN(d1.Im()); //
+
+    /* Initially was EXCEPT_INF(d1.Im()),
+    but d1 is of double -> complex(d1, 0);
+    Hence, d1/(0,0) = (+-inf, nan)
+    */
+
+
 };
 void test_inoutOperator()
 {
