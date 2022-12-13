@@ -34,7 +34,7 @@ private:
 class complex
 {
 public:
-    complex (double _re = 0, double _im = 0);
+    complex (double _re = 0, double _im = 0): re(_re), im(_im) {};
 
     // Functions
     double Re () const {return re; }
@@ -57,6 +57,7 @@ public:
 
     // Methods
     double Mo() const {return sqrt(re*re + im*im);} // Module function
+    double sqMo() const {return re*re + im*im;}
     complex Co() const {return {re,-im};}
     complex Swap() const {return {im, re};}
     //
@@ -199,10 +200,9 @@ public:
     // instead of (return complex(0,0);)
     complex operator / (complex& c) const
     {
-        double sq = c.Mo()*c.Mo();
-        if(c.Mo() != 0)
-            return {(this->re*c.re + this->im*c.im)/sq, (this->im*c.re - this->re*c.im)/sq};
-        return {re/0.0,im/0.0};
+        double sq = c.sqMo();
+            // if sq == 0, then operator will return (0.0/0.0, 0.0/0.0) = (nan, nan)
+        return {(this->re*c.re + this->im*c.im)/sq, (this->im*c.re - this->re*c.im)/sq};
     }
 
 

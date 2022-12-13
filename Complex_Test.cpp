@@ -101,12 +101,12 @@ void test_binOperator()
     std::cout << r0.Re() << ' '<< r0.Im() << ' ' << r1.Re() << ' ' << r1.Im() << ' ' << d1 << std::endl;
     EXCEPT_NAN(r0.Re());
     EXCEPT_NAN(r0.Im());
-    EXCEPT_INF(r1.Re());
-    EXCEPT_INF(r1.Im());
+    EXCEPT_NAN(r1.Re());
+    EXCEPT_NAN(r1.Im());
 
     EXCEPT_NAN(d0.Re());
     EXCEPT_NAN(d0.Im());
-    EXCEPT_INF(d1.Re());
+    EXCEPT_NAN(d1.Re());
     EXCEPT_NAN(d1.Im()); //
 
     /* Initially was EXCEPT_INF(d1.Im()),

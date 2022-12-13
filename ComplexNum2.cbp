@@ -34,7 +34,6 @@
 		<Unit filename="Complex_Test.cpp" />
 		<Unit filename="Complex_Test.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="triangle.cpp" />
 		<Unit filename="triangle.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
